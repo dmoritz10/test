@@ -33,7 +33,9 @@
         // NOTE: OAuth2 'scope' and 'client_id' parameters have moved to initTokenClient().
       })
       .then(function() {  // Load the Calendar API discovery document.
-        gapi.client.load('https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest');
+        gapi.client.load(["https://sheets.googleapis.com/$discovery/rest?version=v4", 
+                           "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+                           "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]);
       });
 
       // Now load the GIS client
