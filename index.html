@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+  <h1>GAPI with GIS async/await</h1>
+  <button id="showEventsBtn" onclick="showEvents();">Show Calendar</button><br><br>
+  <button id="revokeBtn" onclick="revokeToken();">Revoke access token</button>
+
+  <script>
+
+    const gapiLoadPromise = new Promise((resolve, reject) => {
+      gapiLoadOkay = resolve;
+      gapiLoadFail = reject;
+    });
+    const gisLoadPromise = new Promise((resolve, reject) => {
+      gisLoadOkay = resolve;
+      gisLoadFail = reject;
+    });
+
+    var tokenClient;
+
+    (async () => {
+      document.getElementById("showEventsBtn").style.visibility="hidden";
+      document.getElementById("revokeBtn").style.visibility="hidden";
+
+      // First, load and initialize the gapi.client
+      await gapiLoadPromise;
+      await new Promise((resolve, reject) => {
+        // NOTE: the 'auth2' module is no longer loaded.
+        gapi.load('client', {callback: resolve, onerror: reject});
+      });
+      await gapi.client.init({
+        // NOTE: OAuth2 'scope' and 'client_id' parameters have moved to initTokenClient().
+      })
+      .then(function() {  // Load the Calendar API discovery document.
+        gapi.client.load('https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest');
+      });
+
+      // Now load the GIS client
+      await gisLoadPromise;
+      await new Promise((resolve, reject) => {
+        try {
+          tokenClient = google.accounts.oauth2.initTokenClient({
+              client_id: '764306262696-esbdj8daoee741d44fdhrh5fehjtjjm5.apps.googleusercontent.com',
+              scope: 'https://www.googleapis.com/auth/calendar.readonly',
+              prompt: 'consent',
+              callback: '',  // defined at request time in await/promise scope.
+          });
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+      });
+
+      document.getElementById("showEventsBtn").style.visibility="visible";
+      document.getElementById("revokeBtn").style.visibility="visible";
+    })();
+
+    async function getToken(err) {
+
+      if (err.result.error.code == 401 || (err.result.error.code == 403) &&
+          (err.result.error.status == "PERMISSION_DENIED")) {
+
+        // The access token is missing, invalid, or expired, prompt for user consent to obtain one.
+        await new Promise((resolve, reject) => {
+          try {
+            // Settle this promise in the response callback for requestAccessToken()
+            tokenClient.callback = (resp) => {
+              if (resp.error !== undefined) {
+                reject(resp);
+              }
+              // GIS has automatically updated gapi.client with the newly issued access token.
+              console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()));
+              resolve(resp);
+            };
+            tokenClient.requestAccessToken();
+          } catch (err) {
+            console.log(err)
+          }
+        });
+      } else {
+        // Errors unrelated to authorization: server errors, exceeding quota, bad requests, and so on.
+        throw new Error(err);
+      }
+    }
+
+    function showEvents() {
+
+      // Try to fetch a list of Calendar events. If a valid access token is needed,
+      // prompt to obtain one and then retry the original request.
+      gapi.client.calendar.events.list({ 'calendarId': 'primary' })
+      .then(calendarAPIResponse => console.log(JSON.stringify(calendarAPIResponse)))
+      .catch(err  => getToken(err))  // for authorization errors obtain an access token
+      .then(retry => gapi.client.calendar.events.list({ 'calendarId': 'primary' }))
+      .then(calendarAPIResponse => console.log(JSON.stringify(calendarAPIResponse)))
+      .catch(err  => console.log(err));   // cancelled by user, timeout, etc.
+    }
+
+    function revokeToken() {
+      let cred = gapi.client.getToken();
+      if (cred !== null) {
+        google.accounts.oauth2.revoke(cred.access_token, () => {console.log('Revoked: ' + cred.access_token)});
+        gapi.client.setToken('');
+      }
+    }
+
+  </script>
+
+  <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoadOkay()" onerror="gapiLoadFail(event)"></script>
+  <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoadOkay()" onerror="gisLoadFail(event)"></script>
+
+</body>
+</html>
