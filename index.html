@@ -89,6 +89,8 @@
 
     function showEvents() {
 
+      console.log('gapi.client.getToken()', gapi.client.getToken())
+
       // Try to fetch a list of Calendar events. If a valid access token is needed,
       // prompt to obtain one and then retry the original request.
       gapi.client.calendar.events.list({ 'calendarId': 'primary' })
