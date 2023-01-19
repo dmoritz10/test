@@ -11,7 +11,7 @@
 // 
 // most importantly, this offers a clean integration between ui
 
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 
 /**
  * The library methods:
