@@ -243,10 +243,14 @@ main();
 
 })));
 
+window.Goth = Goth
+
+function Goth() {
+
 /**
  * Structures used by the module.
  */
- let google;  // Google's GIS libraries
+let google;  // Google's GIS libraries
 let gapi;    // Google's API libraries
 
 /**
@@ -475,6 +479,5 @@ async function _on_response(r) {
 
   _notify(event_type, state.user);
 }
-
-
+}
 </script>
