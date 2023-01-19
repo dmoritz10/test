@@ -1,4 +1,4 @@
-import Goth from 'gothic';
+import Goth from './gothic.js';
 
 
 const CLI_ID = '992279172814-gmqt9g152hjab4rojlbt8niq1sn299vk.apps.googleusercontent.com';
