@@ -3,10 +3,15 @@ import Goth from './gothic.js';
 
 const CLI_ID = '764306262696-esbdj8daoee741d44fdhrh5fehjtjjm5.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyBG5YxMTiBdvxD5-xxVp0LA1M8IXz8Xtbo';
-const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.metadata.readonly'; // Space delimited if more than one
-const DISCOVERY = ["https://sheets.googleapis.com/$discovery/rest?version=v4", 
-"https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-"https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+const SCOPES = 'https://www.googleapis.com/auth/drive.metadata'; // Space delimited if more than one
+const DISCOVERY = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+
+/* const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.metadata.readonly'; // Space delimited if more than one
+const DISCOVERY =   [
+                    "https://sheets.googleapis.com/$discovery/rest?version=v4", 
+                    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+                    "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
+                    ]; */
 
 /**
  * The google libraries are loaded, and ready for action!
