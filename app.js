@@ -103,8 +103,10 @@ function main() {
   signout.style.display = 'none';
   const signout_btn = document.getElementById('signout_button');
   const revoke_btn = document.getElementById('revoke_button');
+  const readDrive_btn = document.getElementById('readDrive_button');
   signout_btn.onclick = Goth.signout;
   revoke_btn.onclick = Goth.revoke;
+  readDrive_btn.onclick = list_files;
 }
 
 main();
