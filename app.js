@@ -50,7 +50,7 @@ async function list_files() {
   let response;
   try {
     response = await window.gapi.client.drive.files.list({
-      'pageSize': 10,
+      'pageSize': 5,
       'fields': 'files(id, name)',
     });
   } catch (err) {
