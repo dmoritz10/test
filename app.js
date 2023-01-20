@@ -66,7 +66,7 @@ async function list_files() {
   const output = files.reduce(
       (str, file) => `${str}${file.name} (${file.id}\n`,
       'Files:\n');
-  document.getElementById('content').innerText = output + new Date();
+  document.getElementById('content').innerText = output + '\n' + new Date();
 }
 
 /**
