@@ -250,6 +250,10 @@ async function _on_response(r) {
 console.log('on_response', state.user, rawdata)      
       
       await _authorize();
+
+      console.log('_authorize', state)      
+
+
       window.localStorage.setItem('gothic-id', 'loaded');
       event_type = 'signin';
     } catch (err) {
