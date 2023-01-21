@@ -246,6 +246,9 @@ async function _on_response(r) {
     try {
       let rawdata = jwt_decode(r.credential);
       state.user = (({ email, family_name, given_name, picture, name }) => ({ email, family_name, given_name, picture, name}))(rawdata);
+      
+console.log('on_response', state.user, rawdata)      
+      
       await _authorize();
       window.localStorage.setItem('gothic-id', 'loaded');
       event_type = 'signin';
