@@ -251,7 +251,7 @@ console.log('on_response', state.user, rawdata)
       
       await _authorize();
 
-      console.log('_authorize', state)      
+console.log('_authorize', state)      
 
 
       window.localStorage.setItem('gothic-id', 'loaded');
