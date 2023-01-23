@@ -48,7 +48,7 @@ function proceedAsSignedIn() {
  */
 async function list_files() {
 console.log('token1')
-    token()
+    Goth.token()
     console.log('token2')
 
   let response;
