@@ -47,6 +47,10 @@ function proceedAsSignedIn() {
  * Just to demonstrate that the APIs *can* successfully be called.
  */
 async function list_files() {
+console.log('token1')
+    token()
+    console.log('token2')
+
   let response;
   try {
     response = await window.gapi.client.drive.files.list({

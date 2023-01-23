@@ -26,7 +26,8 @@ export default {
   unobserve, // stop observing gothic for events
   signout,   // sign out of google for this app.
   revoke,    // revoke the users credentials (presumably upon their request)
-  user       // return the user details.
+  user,      // return the user details.
+  token      // test for and refresh client token if necessary
 };
 
 /**
@@ -131,6 +132,18 @@ function revoke() {
 
 function user() {
   return state.user;
+}
+
+function token() {
+
+    console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()));
+    console.log('state.tok_client: ' + JSON.stringify(state.tok_client.getToken()));
+
+    state.tok_client.requestAccessToken({prompt: ''});
+
+    console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()));
+    console.log('state.tok_client: ' + JSON.stringify(state.tok_client.getToken()));
+
 }
 
 /* ------------------------------------------------------------------------- *\
