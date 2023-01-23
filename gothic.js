@@ -136,6 +136,9 @@ function user() {
 
 function token() {
 
+
+    
+
     let token = gapi.client.getToken()
     console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()));
     console.log('state.tok_client: ' + JSON.stringify(state.tok_client));
