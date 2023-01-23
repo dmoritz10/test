@@ -140,14 +140,15 @@ function token() {
 
 
     let token = gapi.client.getToken()
-    console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()));
+
+    console.log('gapi.client access token: ', gapi.client.getToken());
 
     console.log('state', state)
     console.log('state.tok_client: ', state.tok_client);
 
     state.tok_client.requestAccessToken({prompt: ''});
 
-    console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()));
+    console.log('gapi.client access token: ', gapi.client.getToken());
     console.log('state.tok_client: ', state.tok_client);
 
 
