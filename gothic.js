@@ -134,31 +134,12 @@ function user() {
   return state.user;
 }
 
-function token() {
+function token(err) {
 
+ 
 
+state.tok_client.requestAccessToken({prompt: ''});
 
-
-    let token = gapi.client.getToken()
-
-    console.log('gapi', gapi)
-    console.log('google', google.accounts)
-    console.log('1', google.accounts.oauth2.getAuthInstance())
-    console.log('2', google.accounts.oauth2.getAuthInstance().currentUser)
-    console.log('3', google.accounts.oauth2.getAuthInstance().currentUser.get())
-    console.log('4', google.accounts.oauth2.getAuthInstance().get().getAuthResponse())
-    console.log('5', google.accounts.oauth2.getAuthInstance().currentUser.get().getAuthResponse().expires_at)
-    
-
-    console.log('gapi.client access token: ', gapi.client.getToken());
-
-    console.log('state', state)
-    console.log('state.tok_client: ', state.tok_client);
-
-    if (!token) state.tok_client.requestAccessToken({prompt: ''});
-
-    console.log('gapi.client access token: ', gapi.client.getToken());
-    console.log('state.tok_client: ', state.tok_client);
 
 
 }
