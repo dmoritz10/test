@@ -57,7 +57,7 @@ async function list_files() {
 
   let response = await window.gapi.client.drive.files.list(params)
     .then(response => {
-        console.log('gapi first try', JSON.stringify(response))
+        console.log('gapi first try', response)
         return response})
     .catch(err  => {
         console.log('gapi error', err)
@@ -85,9 +85,11 @@ const res = async () => {
     const rtn = await response;
     console.log(rtn);
   };
-  console.log('after res', res)
 
-  const files = res.result.files;
+
+  console.log('after res', res())
+
+  const files = res().result.files;
   if (!files || files.length == 0) {
     document.getElementById('content').innerText = 'No files found.';
     return;
