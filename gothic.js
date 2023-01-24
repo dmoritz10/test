@@ -142,7 +142,7 @@ function token() {
     let token = gapi.client.getToken()
 
     console.log('gapi', gapi)
-    console.lob('google', google.accounts)
+    console.log('google', google.accounts)
     console.log('1', google.accounts.oauth2.getAuthInstance())
     console.log('2', google.accounts.oauth2.getAuthInstance().currentUser)
     console.log('3', google.accounts.oauth2.getAuthInstance().currentUser.get())
