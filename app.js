@@ -79,13 +79,13 @@ async function list_files() {
 //     document.getElementById('content').innerText = err.message;
 //     return;
 //   }
-console.log('before res')
+console.log('before res', response)
 
 const res = async () => {
     const rtn = await response;
     console.log(rtn);
   };
-  console.log('after res')
+  console.log('after res', res)
 
   const files = res.result.files;
   if (!files || files.length == 0) {
