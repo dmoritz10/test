@@ -84,6 +84,7 @@ console.log('before res', response)
 const res = async () => {
     const rtn = await response;
     console.log(rtn);
+    return rtn
   };
 
 
