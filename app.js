@@ -52,13 +52,18 @@ async function list_files() {
     'pageSize': 5,
     'fields': 'files(id, name)',
   }
-  let response;
 
-  response = window.gapi.client.drive.files.list(params)
-    .then(response => console.log(JSON.stringify(response)))
-    .catch(err  => token(err))  // for authorization errors obtain an access token
-    .then(retry => window.gapi.client.drive.files.list(params))
-    .then(response => console.log(JSON.stringify(response)))
+  let response = window.gapi.client.drive.files.list(params)
+    .then(response => {
+        console.log('gapi first try', JSON.stringify(response))
+        return response})
+    .catch(err  => {
+        console.log('gapi error', err)
+        token(err) })  // for authorization errors obtain an access token
+    .then(retry => {
+        console.log('gapi retry', retry)
+        window.gapi.client.drive.files.list(params)
+        return retry})
     .catch(err  => console.log(err));   // cancelled by user, timeout, etc.
 
 
