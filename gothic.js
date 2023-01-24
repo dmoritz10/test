@@ -141,11 +141,13 @@ function token() {
 
     let token = gapi.client.getToken()
 
-    console.log('1', gapi.oauth2.getAuthInstance())
-    console.log('2', gapi.oauth2.getAuthInstance().currentUser)
-    console.log('3', gapi.oauth2.getAuthInstance().currentUser.get())
-    console.log('4', gapi.oauth2.getAuthInstance().get().getAuthResponse())
-    console.log('5', gapi.oauth2.getAuthInstance().currentUser.get().getAuthResponse().expires_at)
+    console.log('gapi', gapi)
+    console.lob('google', google.accounts)
+    console.log('1', google.accounts.oauth2.getAuthInstance())
+    console.log('2', google.accounts.oauth2.getAuthInstance().currentUser)
+    console.log('3', google.accounts.oauth2.getAuthInstance().currentUser.get())
+    console.log('4', google.accounts.oauth2.getAuthInstance().get().getAuthResponse())
+    console.log('5', google.accounts.oauth2.getAuthInstance().currentUser.get().getAuthResponse().expires_at)
     
 
     console.log('gapi.client access token: ', gapi.client.getToken());
