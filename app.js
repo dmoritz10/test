@@ -53,7 +53,9 @@ async function list_files() {
     'fields': 'files(id, name)',
   }
 
-  let response = window.gapi.client.drive.files.list(params)
+  console.log('before gapi')
+
+  let response = await window.gapi.client.drive.files.list(params)
     .then(response => {
         console.log('gapi first try', JSON.stringify(response))
         return response})
@@ -66,6 +68,7 @@ async function list_files() {
         return retry})
     .catch(err  => console.log(err));   // cancelled by user, timeout, etc.
 
+    console.log('after gapi')
 
 //   try {
 //     response = await window.gapi.client.drive.files.list({
@@ -76,11 +79,13 @@ async function list_files() {
 //     document.getElementById('content').innerText = err.message;
 //     return;
 //   }
+console.log('before res')
 
 const res = async () => {
     const rtn = await response;
     console.log(rtn);
   };
+  console.log('after res')
 
   const files = res.result.files;
   if (!files || files.length == 0) {
