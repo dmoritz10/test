@@ -54,9 +54,9 @@ async function list_files() {
   }
   let response;
 
-  response = await window.gapi.client.drive.files.list(params)
+  response = window.gapi.client.drive.files.list(params)
     .then(response => console.log(JSON.stringify(response)))
-    .catch(err  => getToken(err))  // for authorization errors obtain an access token
+    .catch(err  => token(err))  // for authorization errors obtain an access token
     .then(retry => window.gapi.client.drive.files.list(params))
     .then(response => console.log(JSON.stringify(response)))
     .catch(err  => console.log(err));   // cancelled by user, timeout, etc.
@@ -72,7 +72,12 @@ async function list_files() {
 //     return;
 //   }
 
-  const files = response.result.files;
+const res = async () => {
+    const rtn = await response;
+    console.log(rtn);
+  };
+
+  const files = res.result.files;
   if (!files || files.length == 0) {
     document.getElementById('content').innerText = 'No files found.';
     return;
