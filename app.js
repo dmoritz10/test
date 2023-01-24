@@ -89,7 +89,8 @@ const res = async () => {
 
   console.log('after res', res())
 
-  const files = res().result.files;
+  const r = res()
+  const files = r.result.files;
   if (!files || files.length == 0) {
     document.getElementById('content').innerText = 'No files found.';
     return;
