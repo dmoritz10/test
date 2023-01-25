@@ -90,7 +90,9 @@ const res = async () => {
 
   console.log('after res', res())
 
-  const r = await res()
+//   const r = await res()
+
+  const r = await response()
 
   console.log('r', r)
   const files = r.result.files;
