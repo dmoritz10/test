@@ -134,11 +134,11 @@ function user() {
   return state.user;
 }
 
-function token(err) {
+async function token(err) {
 
  
 
-state.tok_client.requestAccessToken({prompt: ''});
+await state.tok_client.requestAccessToken({prompt: ''});
 
 
 
