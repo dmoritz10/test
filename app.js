@@ -53,33 +53,44 @@ async function list_files() {
     'fields': 'files(id, name)',
   }
 
-  console.log('before gapi')
+                                            console.log('before gapi')
 
   let response = await window.gapi.client.drive.files.list(params)
-    .then(async response => {
-        console.log('gapi first try', response)
+    .then(async response => {               console.log('gapi first try', response)
+        
         return response})
 
-    .catch(async err  => {
-        console.log('gapi token1', err)
-        await Goth.token(err)   // for authorization errors obtain an access token
+    .catch(async err  => {                  console.log('gapi token1', err)
+        
+        if (err.result.error.code == 401 || err.result.error.code == 403) {
+            await Goth.token()              // for authorization errors obtain an access token
+            let retryResponse = await window.gapi.client.drive.files.list(params)
+                .then(async retry => {      console.log('gapi retry', retry) 
+                    
+                    return retry})
 
-        console.log('gapi token2')
-        let retryResponse = await window.gapi.client.drive.files.list(params)
-            .then(async retryResponse => {
-                console.log('gapi retry', retryResponse) 
-                return retryResponse})
+                .catch(err  => {            console.log('gapi error2', err)
+                    
+                    bootbox.alert('gapi error: ' + err.result.error.code + ' - ' + err.result.error.message);
 
-            .catch(err  => {
-                console.log('gapi error2', err)});   // cancelled by user, timeout, etc.
+                    return null });         // cancelled by user, timeout, etc.
 
             return retryResponse
+
+        } else {
+            
+            bootbox.alert('gapi error: ' + err.result.error.code + ' - ' + err.result.error.message);
+            return null
+
+        }
             
     })
-    console.log('after gapi')
+    
+                                            console.log('after gapi')
 
 
-  console.log('r', response)
+  if (!response) return null
+
   const files = response.result.files;
   if (!files || files.length == 0) {
     document.getElementById('content').innerText = 'No files found.';
