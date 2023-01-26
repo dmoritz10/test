@@ -78,29 +78,6 @@ async function list_files() {
     })
     console.log('after gapi')
 
-//   try {
-//     response = await window.gapi.client.drive.files.list({
-//       'pageSize': 5,
-//       'fields': 'files(id, name)',
-//     });
-//   } catch (err) {
-//     document.getElementById('content').innerText = err.message;
-//     return;
-//   }
-console.log('before res', response)
-
-const res = async () => {
-    const rtn = await response;
-    console.log(rtn);
-    return rtn
-  };
-
-
-  console.log('after res', res())
-
-//   const r = await res()
-
-  const r = response
 
   console.log('r', response)
   const files = response.result.files;
