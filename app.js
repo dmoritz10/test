@@ -92,10 +92,10 @@ const res = async () => {
 
 //   const r = await res()
 
-  const r = await response()
+  const r = response
 
-  console.log('r', r)
-  const files = r.result.files;
+  console.log('r', response)
+  const files = response.result.files;
   if (!files || files.length == 0) {
     document.getElementById('content').innerText = 'No files found.';
     return;
