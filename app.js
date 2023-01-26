@@ -61,7 +61,7 @@ async function list_files() {
         return response})
     .catch(err  => {
         console.log('gapi error', err)
-        token(err) })  // for authorization errors obtain an access token
+        Goth.token(err) })  // for authorization errors obtain an access token
     .then(retry => {
         console.log('gapi retry', retry)
         window.gapi.client.drive.files.list(params)
