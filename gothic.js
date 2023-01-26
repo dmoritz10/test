@@ -136,11 +136,7 @@ function user() {
 
 async function token(err) {
 
- 
-
-await state.tok_client.requestAccessToken({prompt: ''});
-
-
+    await state.tok_client.requestAccessToken({prompt: ''});
 
 }
 
