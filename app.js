@@ -64,13 +64,15 @@ async function list_files() {
         console.log('gapi token1', err)
         await Goth.token(err)   // for authorization errors obtain an access token
         console.log('gapi token2')
-        .then(async retry => {
-            console.log('gapi retry', retry)
-            let retryResponse = await window.gapi.client.drive.files.list(params)
-            return retryResponse})
+        let retryResponse = await window.gapi.client.drive.files.list(params)
+            .then(async retryResponse => {
+                console.log('gapi retry', retryResponse) 
+                return retryResponse})
 
-        .catch(err  => {
-            console.log('gapi error2', err)});   // cancelled by user, timeout, etc.
+            .catch(err  => {
+                console.log('gapi error2', err)});   // cancelled by user, timeout, etc.
+
+            return retryResponse
             
     })
     console.log('after gapi')
