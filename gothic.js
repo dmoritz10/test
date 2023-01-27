@@ -74,6 +74,8 @@ function observe(cb) {
 
 function button(parent_id, params = {}) {
 
+    console.logh('button', parent_id)
+
   const ctr = document.getElementById(parent_id);
   if (!ctr) {
     throw(new Error(`No container for signin button: '${parent_id}' `));
@@ -265,7 +267,7 @@ console.log('_authorize', state)
       event_type = 'signin';
     } catch (err) {
       if (err === 'auth-failed') {
-        event_type = 'auth-failed';
+        event_type = 'auth-failed';_on_response
       } else {
         console.log(err);
         event_type = 'error';
