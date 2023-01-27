@@ -74,7 +74,7 @@ function observe(cb) {
 
 function button(parent_id, params = {}) {
 
-    console.logh('button', parent_id)
+    console.log('button', parent_id)
 
   const ctr = document.getElementById(parent_id);
   if (!ctr) {
