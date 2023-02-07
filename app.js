@@ -1,8 +1,7 @@
 import Goth from './gothic.js';
 
-       API_KEY : 'AIzaSyCObS1ZM8aAyPfqXZDtq2-rRrMqpJZxBc0',  // TODO: Update placeholder with desired API key.
-
-        CLI_ID : '8803561872-jd3c7f4e1ugeld0l6ssfmse40n5nfr6l.apps.googleusercontent.com',  // TODO: Update placeholder with desired client ID.
+const  API_KEY = 'AIzaSyCObS1ZM8aAyPfqXZDtq2-rRrMqpJZxBc0'  // TODO: Update placeholder with desired API key.
+const   CLI_ID = '8803561872-jd3c7f4e1ugeld0l6ssfmse40n5nfr6l.apps.googleusercontent.com'  // TODO: Update placeholder with desired client ID.
 
 // const CLI_ID = '764306262696-esbdj8daoee741d44fdhrh5fehjtjjm5.apps.googleusercontent.com';
 // const API_KEY = 'AIzaSyBG5YxMTiBdvxD5-xxVp0LA1M8IXz8Xtbo';
