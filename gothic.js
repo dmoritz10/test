@@ -255,19 +255,12 @@ async function _on_response(r) {
     try {
       let rawdata = jwt_decode(r.credential);
       state.user = (({ email, family_name, given_name, picture, name }) => ({ email, family_name, given_name, picture, name}))(rawdata);
-      
-console.log('on_response', state.user, rawdata)      
-      
       await _authorize();
-
-console.log('_authorize', state)      
-
-
       window.localStorage.setItem('gothic-id', 'loaded');
       event_type = 'signin';
     } catch (err) {
       if (err === 'auth-failed') {
-        event_type = 'auth-failed';_on_response
+        event_type = 'auth-failed';
       } else {
         console.log(err);
         event_type = 'error';
