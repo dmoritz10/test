@@ -48,10 +48,16 @@ function proceedAsSignedIn() {
 
 async function list_files() {
 
+  let params = {
+    'pageSize': 5,
+    'fields': 'files(id, name)',
+  }
+
+
   const options = { limit: 5, delay: 2000 };
   const retrier = new Retrier(options);
   retrier
-    .resolve(attempt => new Promise((resolve, reject) => reject('Rejected!')))
+    .resolve(attempt => window.gapi.client.drive.files.list(params))
     .then(
       result => console.log(result),
       error => console.error(error) // After 5 attempts logs: "Rejected!"
