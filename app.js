@@ -49,13 +49,16 @@ function proceedAsSignedIn() {
 async function list_files() {
 
   let params = {
-    'pageSize': 'abc',
+    'pageSize': 5,
     'fields': 'files(id, name)',
   }
 
   let fn =  window.gapi.client.drive.files.list(params)
   const options = { limit: 5, delay: 2000 };
   const retrier = new Retrier(options);
+
+  while (true) {
+
   let response = await retrier
     .resolve(async attempt => fn)
     .then(
@@ -63,7 +66,9 @@ async function list_files() {
       error => {console.error(error) ;return error}
     );
 
-    console.log('response', response)
+    // console.log('response', response)
+
+  }
 
 }
 
