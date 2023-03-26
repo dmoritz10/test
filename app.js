@@ -56,7 +56,7 @@ async function list_files() {
   let fn =  window.gapi.client.drive.files.list(params)
   const options = { limit: 5, delay: 2000 };
   const retrier = new Retrier(options);
-  let response = retrier
+  let response = await retrier
     .resolve(async attempt => fn)
     .then(
       result => {console.log(result);return result},
