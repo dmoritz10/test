@@ -53,15 +53,17 @@ async function list_files() {
     'fields': 'files(id, name)',
   }
 
-  let response =  window.gapi.client.drive.files.list(params)
+  let fn =  window.gapi.client.drive.files.list(params)
   const options = { limit: 5, delay: 2000 };
   const retrier = new Retrier(options);
-  retrier
-    .resolve(async attempt => response)
+  let response = retrier
+    .resolve(async attempt => fn)
     .then(
-      result => console.log(result),
-      error => console.error(error) // After 5 attempts logs: "Rejected!"
+      result => {console.log(result);return result},
+      error => {console.error(error) ;return error}
     );
+
+    console.log('response', response)
 
 }
 
