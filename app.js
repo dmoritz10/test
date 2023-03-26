@@ -1,17 +1,17 @@
 import Goth from './gothic.js';
+import { Retrier } from '../common/gothic.js';
 
-const  API_KEY = 'AIzaSyCObS1ZM8aAyPfqXZDtq2-rRrMqpJZxBc0'  // TODO: Update placeholder with desired API key.
-const   CLI_ID = '8803561872-jd3c7f4e1ugeld0l6ssfmse40n5nfr6l.apps.googleusercontent.com'  // TODO: Update placeholder with desired client ID.
+const API_KEY = 'AIzaSyCObS1ZM8aAyPfqXZDtq2-rRrMqpJZxBc0'  // TODO: Update placeholder with desired API key.
+const CLI_ID = '8803561872-jd3c7f4e1ugeld0l6ssfmse40n5nfr6l.apps.googleusercontent.com'  // TODO: Update placeholder with desired client ID.
 
 // const CLI_ID = '764306262696-esbdj8daoee741d44fdhrh5fehjtjjm5.apps.googleusercontent.com';
 // const API_KEY = 'AIzaSyBG5YxMTiBdvxD5-xxVp0LA1M8IXz8Xtbo';
 // const SCOPES = 'https://www.googleapis.com/auth/drive.metadata'; // Space delimited if more than one
 // const DISCOVERY = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
 
-const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.metadata.readonly'; // Space delimited if more than one
+const SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.metadata.readonly'; // Space delimited if more than one
 const DISCOVERY =   [
                     "https://sheets.googleapis.com/$discovery/rest?version=v4", 
-                    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
                     "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
                     ];
 
@@ -45,10 +45,24 @@ function proceedAsSignedIn() {
   document.getElementById('signout').style.display = 'block';
   list_files();
 }
+
+async function list_files() {
+
+  const options = { limit: 5, delay: 2000 };
+  const retrier = new Retrier(options);
+  retrier
+    .resolve(attempt => new Promise((resolve, reject) => reject('Rejected!')))
+    .then(
+      result => console.log(result),
+      error => console.error(error) // After 5 attempts logs: "Rejected!"
+    );
+
+}
+
 /**
  * Just to demonstrate that the APIs *can* successfully be called.
  */
-async function list_files() {
+async function list_files1() {
 
   let params = {
     'pageSize': 5,
