@@ -1,4 +1,4 @@
-import Goth from './gothic.js';
+import Goth from '../common/gothic.js';
 import { Retrier } from '../common/retrier.js';
 
 const API_KEY = 'AIzaSyCObS1ZM8aAyPfqXZDtq2-rRrMqpJZxBc0'  // TODO: Update placeholder with desired API key.
