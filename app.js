@@ -60,7 +60,7 @@ async function list_files() {
   // while (true) {
 
   let response = await retrier
-    .resolve(async fn)
+    .resolve(fn)
     .then(
       result => {console.log(result);return result},
       error => {console.error(error) ;return error}
