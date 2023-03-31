@@ -61,8 +61,8 @@ async function list_files() {
 
   while (true) {
 
- 
-    console.log('counter', i++)
+ var d = new date()
+    console.log('counter', i++, new Date() - d)
   let response = await retrier
     .resolve(async attempt => fn)
     .then(
