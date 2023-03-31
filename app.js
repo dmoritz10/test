@@ -58,10 +58,10 @@ async function list_files() {
   const retrier = new Retrier(options);
 
   var i = 0
+  var d = new Date()
 
   while (true) {
 
- var d = new Date()
     console.log('counter', i++, new Date() - d)
   let response = await retrier
     .resolve(async attempt => fn)
