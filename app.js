@@ -49,7 +49,7 @@ function proceedAsSignedIn() {
 async function list_files() {
 
   let params = {
-    'pageSize': 5,
+    'pageSize': 1,
     'fields': 'files(id, name)',
   }
 
