@@ -57,8 +57,12 @@ async function list_files() {
   const options = { limit: 5, delay: 2000 };
   const retrier = new Retrier(options);
 
+  var i = 0
+
   while (true) {
 
+ 
+    console.log('counter', i++)
   let response = await retrier
     .resolve(async attempt => fn)
     .then(
